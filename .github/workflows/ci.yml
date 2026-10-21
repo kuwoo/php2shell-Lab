@@ -1,0 +1,43 @@
+name: CI
+
+# 触发条件：push 到 main、PR 到 main、手动触发
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-and-poc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 构建并启动靶场
+        run: docker compose up -d --build
+
+      - name: 等待容器就绪
+        run: |
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:8082/ >/dev/null 2>&1; then
+              echo "容器已就绪"; exit 0
+            fi
+            sleep 2
+          done
+          echo "容器 30 次轮询后仍未就绪"; docker compose logs; exit 1
+
+      - name: 验证 RCE（--cmd id 应为 www-data）
+        run: |
+          python3 poc.py --target http://localhost:8082 --cmd id | tee /tmp/poc-cmd.txt
+          grep -q "uid=33(www-data)" /tmp/poc-cmd.txt
+
+      - name: 验证默认展示载荷
+        run: |
+          python3 poc.py --target http://localhost:8082 | tee /tmp/poc-showcase.txt
+          grep -q "uid=33(www-data)" /tmp/poc-showcase.txt
+
+      - name: 失败时打印日志
+        if: failure()
+        run: docker compose logs

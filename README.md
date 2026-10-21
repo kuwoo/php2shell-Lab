@@ -1,5 +1,12 @@
 # php2shell-lab
 
+[![CI](https://img.shields.io/github/actions/workflow/status/kuwoo/php2shell-Lab/ci.yml?branch=main)](https://github.com/kuwoo/php2shell-Lab/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![PHP](https://img.shields.io/badge/PHP-8.2.34-777BB4?logo=php&logoColor=white)](#)
+[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](#)
+[![Python](https://img.shields.io/badge/Python-3.7%2B-3776AB?logo=python&logoColor=white)](#)
+[![Stars](https://img.shields.io/github/stars/kuwoo/php2shell-Lab?style=social)](https://github.com/kuwoo/php2shell-Lab/stargazers)
+
 基于 Docker 的本地靶场，用于复现和学习 PHP 高危漏洞 **php2shell**（CVE-2026-109618 / CVE-2026-109619）的第一条攻击链（Chain A）：
 
 > `session.upload_progress` 文件名注入 + 应用本地文件包含（LFI）→ 远程命令执行（RCE）
