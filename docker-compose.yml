@@ -1,0 +1,6 @@
+services:
+  # 正常部署：Apache 以 www-data 运行 → RCE 得到 www-data
+  php2shell:
+    build: .
+    ports:
+      - "8082:80"
