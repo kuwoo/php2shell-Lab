@@ -1,5 +1,7 @@
 # php2shell-lab
 
+> 🌐 **Language / 语言切换：** [中文](README.md) · [English](README_EN.md)
+
 [![CI](https://img.shields.io/github/actions/workflow/status/kuwoo/php2shell-Lab/ci.yml?branch=main)](https://github.com/kuwoo/php2shell-Lab/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![PHP](https://img.shields.io/badge/PHP-8.2.34-777BB4?logo=php&logoColor=white)](#)
@@ -95,12 +97,15 @@ www-data
 │   └── index.php          # 故意脆弱的应用：含一个 LFI 端点（Chain A 的前提）
 ├── docs/
 │   ├── 操作手册.md          # 手把手的操作手册（环境、复现、自定义、FAQ）
-│   └── 原理分析.md          # 从 PHP session 机制到完整攻击链的深度分析
+│   ├── 原理分析.md          # 从 PHP session 机制到完整攻击链的深度分析
+│   ├── manual-en.md       # Operation manual（English）
+│   └── analysis-en.md     # In-depth analysis（English）
 ├── Dockerfile             # 固定到受影响版本 php:8.2.34-apache
 ├── docker-compose.yml     # 定义唯一的 php2shell 服务（8082）
 ├── php.ini                # 靶场专用配置（开 upload_progress、关 cleanup、固定会话目录）
 ├── poc.py                 # Chain A 复现脚本（含「展示载荷」和 --cmd 两种用法）
-└── README.md
+├── README.md              # 主 README（中文）
+└── README_EN.md           # 英文 README（English）
 ```
 
 ---
@@ -111,6 +116,8 @@ www-data
 |------|--------|------|
 | [docs/操作手册.md](docs/操作手册.md) | 想先跑起来的人 | 环境要求 → 启动 → 复现 → 自定义 → 停止/清理 → FAQ |
 | [docs/原理分析.md](docs/原理分析.md) | 想弄懂原理的人 | 前置知识 → 根因 → Chain A 逐步拆解 → 三条链对比 → 检测与修复 |
+
+> 英文版：[docs/manual-en.md](docs/manual-en.md) · [docs/analysis-en.md](docs/analysis-en.md)，以及 [README_EN.md](README_EN.md)。
 
 ---
 

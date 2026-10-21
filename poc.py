@@ -23,6 +23,17 @@ Chain A 演示：session.upload_progress 文件名注入 + LFI → RCE
   - 默认载荷用 PHP_EOL 输出换行，在「终端」里看最清楚；
     想在「浏览器」里看换行，把 PHP_EOL 换成 '<br>'，或用 <pre> 包住输出（见 docs/操作手册.md）。
   - 仅用于本地靶场 / 授权测试。
+
+（English / 英文）
+Chain A demo: session.upload_progress filename injection + LFI → RCE.
+CVE-2026-109618 / 109619, first chain (based on ikow/php2shell-poc).
+
+  python poc.py --target http://localhost:8082                 # showcase payload
+  python poc.py --target http://localhost:8082 --cmd "id"      # one custom command
+
+  - php2shell gives the web user (usually www-data), not root; going to root
+    needs a separate local privilege escalation (see docs/analysis-en.md).
+  - Local lab / authorized testing only.
 """
 import argparse
 import random
